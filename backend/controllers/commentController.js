@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import {
   createComment,
+  findComentWithReplies,
   findCommentById,
   updateComment,
 } from "../services/commentService.js";
@@ -44,3 +45,13 @@ export const commentReply = asyncHandler(async (req, res, next) => {
   await session.commitTransaction();
   return res.json(new apiResponse(200, newComment));
 });
+
+
+export const commentRepliesFind = asyncHandler(async (req, res, next) => {
+  const comment = await findComentWithReplies(req.params.id);
+  if (!comment) {
+    return next(new apiError(400, ["comment not found"]));
+  }
+  return res.json(new apiResponse(200, comment.replies));
+});
+

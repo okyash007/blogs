@@ -15,3 +15,17 @@ export const findCommentById = async (id) => {
   const comment = await Comment.findById(id);
   return comment;
 };
+
+
+export const findComentWithReplies = async (id) => {
+  const commnet = await Comment.findById(id)
+    .populate({
+      path: "replies",
+      populate: {
+        path: "user",
+        select: "name email"
+      },
+    })
+    .exec();
+  return commnet;
+};

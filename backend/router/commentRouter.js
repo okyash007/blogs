@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { commentCreate, commentReply } from "../controllers/commentController.js";
+import {
+  commentCreate,
+  commentRepliesFind,
+  commentReply,
+} from "../controllers/commentController.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 import { validateZodSchema } from "../middlewares/validateZodSchema.js";
 import { commentSchema } from "../zod/schema.js";
@@ -13,3 +17,7 @@ commentRouter
 commentRouter
   .route("/:id")
   .post(verifyToken, validateZodSchema(commentSchema), commentReply);
+
+
+commentRouter.route("/replies/:id").get(commentRepliesFind);
+
