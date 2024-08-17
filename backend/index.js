@@ -6,6 +6,7 @@ import serverless from "serverless-http";
 import { errorMiddleWare } from "./middlewares/errorMiddleWare.js";
 import { userRouter } from "./router/userRouter.js";
 import { postRouter } from "./router/postRouter.js";
+import { commentRouter } from "./router/commentRouter.js";
 
 dotenv.config({
   path: "./.env",
@@ -41,5 +42,6 @@ app.get("/", (req, res) => {
 
 app.use("/user", userRouter);
 app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 app.use(errorMiddleWare);

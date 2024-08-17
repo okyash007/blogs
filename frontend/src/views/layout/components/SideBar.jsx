@@ -18,7 +18,7 @@ const SideBar = () => {
           <TbLayoutSidebarLeftExpand size={25} />
         </Button>
       </SheetTrigger>
-      <SheetContent side={"left"} className="m-3 rounded-3xl h-max border-2">
+      <SheetContent side={"left"}>
         <SheetHeader>
           <SheetTitle>Are you absolutely sure?</SheetTitle>
           <SheetDescription>
