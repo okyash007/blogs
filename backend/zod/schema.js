@@ -32,3 +32,8 @@ export const postUpdateSchema = z.object({
   title: z.string({ message: "title is required" }),
   content: z.string({ message: "content is required" }),
 });
+
+export const commentSchema = z.object({
+  content: z.string({ message: "content is required" }),
+  post: z.string({ message: "post is required" }),
+});

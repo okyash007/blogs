@@ -18,4 +18,6 @@ commentRouter
   .route("/:id")
   .post(verifyToken, validateZodSchema(commentSchema), commentReply);
 
+
 commentRouter.route("/replies/:id").get(commentRepliesFind);
+

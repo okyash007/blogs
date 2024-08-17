@@ -46,6 +46,7 @@ export const commentReply = asyncHandler(async (req, res, next) => {
   return res.json(new apiResponse(200, newComment));
 });
 
+
 export const commentRepliesFind = asyncHandler(async (req, res, next) => {
   const comment = await findComentWithReplies(req.params.id);
   if (!comment) {
@@ -53,3 +54,4 @@ export const commentRepliesFind = asyncHandler(async (req, res, next) => {
   }
   return res.json(new apiResponse(200, comment.replies));
 });
+
