@@ -12,8 +12,8 @@ const index = () => {
   async function getPost(id) {
     const res = await makeGetRequest(`http://localhost:4000/post/${id}`);
     if (res.success === true) {
-      const { title, content } = res.data;
-      setBlog({ title, content: JSON.parse(content) });
+      const { _id, title, content, comments } = res.data;
+      setBlog({ title, content: JSON.parse(content), comments, _id });
     }
   }
   useEffect(() => {
@@ -38,7 +38,7 @@ const index = () => {
         <Button>Comment</Button>
       </div> */}
       <div className="mx-[5%]">
-        <Comments />
+        <Comments comments={blog.comments} post={blog._id} />
       </div>
     </div>
   );

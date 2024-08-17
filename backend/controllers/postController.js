@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import {
   createPost,
   findPostById,
+  findPostPopulated,
   updatePost,
 } from "../services/postService.js";
 import { findUserById, updateUser } from "../services/userService.js";
@@ -42,7 +43,7 @@ export const postUpdate = asyncHandler(async (req, res, next) => {
 });
 
 export const postFind = asyncHandler(async (req, res, next) => {
-  const post = await findPostById(req.params.id);
+  const post = await findPostPopulated(req.params.id);
   if (!post) {
     return next(new apiError(400, ["post not found"]));
   }
