@@ -10,12 +10,19 @@ const Comments = () => {
         { content: "evbiejvefv", replies: [] },
       ],
     },
+    {
+      content: "hbiejcnedlcewdcwdcdw",
+      replies: [
+        { content: "dsibckdsc dscdwcdw", replies: [] },
+        { content: "evbiejvefvcdwc", replies: [] },
+      ],
+    },
   ]);
   const [text, setText] = useState("");
 
   return (
     <div>
-      <div>
+      <div className="space-y-5">
         {comments.map((m) => {
           return <Comment key={m.content} comment={m} text={text} />;
         })}

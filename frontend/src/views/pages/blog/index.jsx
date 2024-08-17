@@ -34,10 +34,10 @@ const index = () => {
       <div>
         <Editor blocks={blog.content} editable={false} setBlocks={() => {}} />
       </div>
-      <div className="mx-[5%]">
+      {/* <div className="mx-[5%]">
         <Button>Comment</Button>
-      </div>
-      <div>
+      </div> */}
+      <div className="mx-[5%]">
         <Comments />
       </div>
     </div>
