@@ -4,6 +4,8 @@ import cors from "cors";
 import connectDb from "./db/connectDb.js";
 import serverless from "serverless-http";
 import { errorMiddleWare } from "./middlewares/errorMiddleWare.js";
+import { userRouter } from "./router/userRouter.js";
+import { postRouter } from "./router/postRouter.js";
 
 dotenv.config({
   path: "./.env",
@@ -36,5 +38,8 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.get("/", (req, res) => {
   res.json({ status: "active" });
 });
+
+app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 app.use(errorMiddleWare);

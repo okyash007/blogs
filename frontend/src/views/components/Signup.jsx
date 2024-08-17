@@ -1,3 +1,5 @@
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,12 +15,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { makePostRequest } from "../pages/apis/makePostRequest";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/userSlice";
+import { makePostRequest } from "../pages/apis/makePostRequest";
 
 const formSchema = z.object({
+  name: z.string({
+    message: "Name Required",
+  }),
   email: z
     .string({
       message: "Email is required",
@@ -35,19 +38,22 @@ const formSchema = z.object({
     }),
 });
 
-export function Login() {
+export function Signup() {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: null,
       email: null,
       password: null,
     },
   });
 
-  async function loginUser(body) {
-    const res = await makePostRequest("http://localhost:4000/user/login", body);
+  async function signupUser(body) {
+    const res = await makePostRequest(
+      "http://localhost:4000/user/signup",
+      body
+    );
     setLoading(false);
     if (res.success == true) {
       const { name, email } = res.data.user;
@@ -58,15 +64,28 @@ export function Login() {
 
   function onSubmit(values) {
     setLoading(true);
-    loginUser(values);
+    signupUser(values);
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-2"
+        className="gap-2 flex flex-col"
       >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="space-y-0">
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Your name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="email"
@@ -98,7 +117,7 @@ export function Login() {
           <Button className={"mt-4"}>loaing</Button>
         ) : (
           <Button type="submit" className={"mt-4"}>
-            Login
+            Sign Up
           </Button>
         )}
       </form>

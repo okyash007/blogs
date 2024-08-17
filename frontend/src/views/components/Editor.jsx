@@ -4,10 +4,9 @@ import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 
-const Editor = () => {
-  const [blocks, setBlocks] = useState([]);
+const Editor = ({ editable, blocks, setBlocks }) => {
   const editor = useCreateBlockNote({
-    initialContent: JSON.parse(localStorage.getItem("data")),
+    initialContent: blocks,
   });
 
   const darkRedTheme = {
@@ -21,10 +20,14 @@ const Editor = () => {
   };
 
   return (
-    <div style={{ marginInline: "50px" }}>
+    <div
+      style={
+        editable == true ? { marginInline: "50px" } : { marginInline: "5%" }
+      }
+    >
       <BlockNoteView
         editor={editor}
-        editable={true}
+        editable={editable}
         onChange={() => {
           setBlocks(editor.document);
         }}
