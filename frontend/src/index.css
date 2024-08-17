@@ -72,6 +72,10 @@
   padding-inline: 0;
 }
 
-body{
+body {
   background-color: black;
+}
+
+.sr-only {
+  display: none;
 }

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeGetRequest } from "../apis/makeGetRequest";
 import { useParams } from "react-router-dom";
 import Editor from "../../components/Editor";
+import { Button } from "@/components/ui/button";
+import Comments from "./components/Comments";
 
 const index = () => {
   const [blog, setBlog] = useState(null);
@@ -25,12 +27,18 @@ const index = () => {
   }
 
   return (
-    <div>
-      <div className="mb-4" style={{ marginInline: "5%" }}>
+    <div className="pb-[5%]">
+      <div className="mb-4 mx-[5%]">
         <h1 className="text-5xl font-bold tracking-wide">{blog.title}</h1>
       </div>
       <div>
         <Editor blocks={blog.content} editable={false} setBlocks={() => {}} />
+      </div>
+      <div className="mx-[5%]">
+        <Button>Comment</Button>
+      </div>
+      <div>
+        <Comments />
       </div>
     </div>
   );
