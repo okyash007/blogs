@@ -48,31 +48,17 @@ function App() {
   }
 
   const appRouter = createBrowserRouter([
-    // {
-    //   path: "/",
-    //   element: <Public />,
-    //   children: [
-    //     {
-    //       path: "/login",
-    //       element: <Login />,
-    //     },
-    //     {
-    //       path: "/signup",
-    //       element: <Signup />,
-    //     },
-
-    //     {
-    //       path: "/",
-    //       element: <Navigate to={"/blogs"} />,
-    //     },
-    //   ],
-    // },
+    {
+      path: "/",
+      element: <Navigate to={"/blogs"} />,
+    },
     {
       path: "/",
       element: user ? <Private /> : <Public />,
       children: [
         {
           path: "/blogs",
+          index: true,
           element: <Blogs />,
         },
         {
@@ -90,15 +76,15 @@ function App() {
       element: <Private />,
       children: [
         {
-          path: "create",
+          path: "/create",
           element: <Create />,
         },
         {
-          path: "edit/:id",
+          path: "/edit/:id",
           element: <Edit />,
         },
         {
-          path: "profile/edit",
+          path: "/profile/edit",
           element: <EditProfile />,
         },
         {
