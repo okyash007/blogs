@@ -9,6 +9,7 @@ import { findUserById, updateUser } from "../services/userService.js";
 import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { findAllPosts } from "../services/postService.js";
 
 export const postCreate = asyncHandler(async (req, res, next) => {
   const user = await findUserById(req.user.id);
@@ -48,4 +49,9 @@ export const postFind = asyncHandler(async (req, res, next) => {
     return next(new apiError(400, ["post not found"]));
   }
   return res.json(new apiResponse(200, post));
+});
+
+export const postAll = asyncHandler(async (req, res) => {
+  const posts = await findAllPosts();
+  return res.json(new apiResponse(200, posts));
 });

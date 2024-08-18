@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -9,8 +9,12 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { TbLayoutSidebarLeftExpand } from "react-icons/tb";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
+  const user = useSelector((store) => store.user.data);
+  const [open, setOpen] = useState(false);
   return (
     <Sheet>
       <SheetTrigger>
@@ -19,13 +23,16 @@ const SideBar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side={"left"}>
-        <SheetHeader>
-          <SheetTitle>Are you absolutely sure?</SheetTitle>
-          <SheetDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </SheetDescription>
-        </SheetHeader>
+        <div className="flex flex-col gap-8">
+          <div>
+            <h1 className="text-3xl font-bold">{user.name}</h1>
+            <p className="text-xs">{user.email}</p>
+          </div>
+
+          <div>
+            <Link to={"/create"}>Create Blog</Link>
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );

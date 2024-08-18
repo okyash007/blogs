@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { makeGetRequest } from "../apis/makeGetRequest";
+import { makeGetRequest } from "../../utils/apis/makeGetRequest";
 import { useParams } from "react-router-dom";
 import Editor from "../../components/Editor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { makePutRequest } from "../apis/makePutRequest";
+import { makePutRequest } from "../../utils/apis/makePutRequest";
 import { useSelector } from "react-redux";
 
 const index = () => {
@@ -32,7 +32,7 @@ const index = () => {
   }, []);
 
   if (!blog) {
-    return <></>;
+    return <div className="flex justify-center">loading</div>;
   }
 
   return (

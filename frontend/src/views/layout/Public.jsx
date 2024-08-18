@@ -1,9 +1,18 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SideBar from "./components/SideBar";
 import { useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Onboard from "../components/Onboard";
 
 const Public = () => {
   const user = useSelector((store) => store.user.data);
@@ -15,8 +24,17 @@ const Public = () => {
       <div>
         <Navbar>
           <div className="flex items-center justify-between">
-            <p className="text-2xl p-2">Blogs</p>
-            <Button>Login</Button>
+            <Link to={"/blogs"} className="text-2xl p-2">
+              Blogs
+            </Link>
+            <Dialog>
+              <DialogTrigger>
+                <Button>Login</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Onboard dafault="login" />
+              </DialogContent>
+            </Dialog>
           </div>
         </Navbar>
       </div>

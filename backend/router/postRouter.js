@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  postAll,
   postCreate,
   postFind,
   postUpdate,
@@ -9,6 +10,8 @@ import { validateZodSchema } from "../middlewares/validateZodSchema.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 
 export const postRouter = Router();
+
+postRouter.get("/", postAll);
 
 postRouter
   .route("/")

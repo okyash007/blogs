@@ -1,8 +1,8 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SideBar from "./components/SideBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,31 +12,48 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { setUser } from "../../store/userSlice";
 
 const Private = () => {
   const user = useSelector((store) => store.user.data);
+  const dispatch = useDispatch();
 
   return user ? (
     <>
       <div className="mb-3">
         <Navbar>
           <div className="flex justify-between items-center">
-            <SideBar />
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Button variant="ghost">{user.name}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>
-                  <p>{user.email}</p>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
-                <DropdownMenuItem>Subscription</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center">
+              {/* <SideBar /> */}
+              <Link to={"/blogs"} className="text-2xl p-2">
+                Blogs
+              </Link>
+            </div>
+            <div>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Button variant="ghost">{user.name}</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>
+                    <p>{user.email}</p>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <Link to={"/create"}>
+                    <DropdownMenuItem>Create Blog</DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      dispatch(setUser(null));
+                      localStorage.clear();
+                    }}
+                  >
+                    Log Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </Navbar>
       </div>

@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { makePostRequest } from "../pages/apis/makePostRequest";
+import { makePostRequest } from "../utils/apis/makePostRequest";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";

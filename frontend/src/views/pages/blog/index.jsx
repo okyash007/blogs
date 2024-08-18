@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { makeGetRequest } from "../apis/makeGetRequest";
+import { makeGetRequest } from "../../utils/apis/makeGetRequest";
 import { useParams } from "react-router-dom";
 import Editor from "../../components/Editor";
 import { Button } from "@/components/ui/button";
 import Comments from "./components/Comments";
+
 
 const index = () => {
   const [blog, setBlog] = useState(null);
@@ -20,10 +21,8 @@ const index = () => {
     getPost(id);
   }, []);
 
-  console.log(blog);
-
   if (!blog) {
-    return <></>;
+    return <div></div>;
   }
 
   return (
@@ -34,11 +33,11 @@ const index = () => {
       <div>
         <Editor blocks={blog.content} editable={false} setBlocks={() => {}} />
       </div>
-      {/* <div className="mx-[5%]">
-        <Button>Comment</Button>
-      </div> */}
       <div className="mx-[5%]">
-        <Comments comments={blog.comments} post={blog._id} />
+        <Comments
+          comments={blog.comments}
+          post={blog._id}
+        />
       </div>
     </div>
   );

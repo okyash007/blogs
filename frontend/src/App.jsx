@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import Editor from "./views/components/Editor";
 import { Login } from "./views/components/Login";
-import Navbar from "./views/layout/components/Navbar";
 import { Signup } from "./views/components/Signup";
 import Blogs from "./views/pages/blogs/index";
 import Blog from "./views/pages/blog/index";
-import Home from "./views/pages/home/index";
 import Create from "./views/pages/create/index";
 import Edit from "./views/pages/edit/index";
 import {
@@ -16,7 +13,7 @@ import {
 import Public from "./views/layout/Public";
 import Private from "./views/layout/Private";
 import { useDispatch, useSelector } from "react-redux";
-import { makeGetRequest } from "./views/pages/apis/makeGetRequest";
+import { makeGetRequest } from "./views/utils/apis/makeGetRequest";
 import { setUser } from "./store/userSlice";
 
 function App() {
@@ -78,10 +75,6 @@ function App() {
       path: "/",
       element: <Private />,
       children: [
-        {
-          path: "home",
-          element: <Home />,
-        },
         {
           path: "create",
           element: <Create />,

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { makePostRequest } from "../pages/apis/makePostRequest";
+import { makePostRequest } from "../utils/apis/makePostRequest";
 
 const formSchema = z.object({
   name: z.string({

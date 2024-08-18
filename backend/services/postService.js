@@ -33,3 +33,11 @@ export const findPostPopulated = async (id) => {
     });
   return post;
 };
+
+export const findAllPosts = async () => {
+  const posts = await Post.find().populate({
+    path: "user",
+    select: "name email",
+  });
+  return posts;
+};

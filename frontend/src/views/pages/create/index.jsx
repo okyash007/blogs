@@ -3,9 +3,11 @@ import Editor from "../../components/Editor";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
-import { makePostRequest } from "../apis/makePostRequest";
+import { makePostRequest } from "../../utils/apis/makePostRequest";
+import { useNavigate } from "react-router-dom";
 
 const index = () => {
+  const navigate = useNavigate();
   const [blog, setBlog] = useState(
     localStorage.getItem("blog")
       ? JSON.parse(localStorage.getItem("blog"))
@@ -30,7 +32,10 @@ const index = () => {
 
   async function createPost(body) {
     const res = await makePostRequest("http://localhost:4000/post", body);
-    console.log(res);
+    if (res.success) {
+      localStorage.removeItem("blog");
+      navigate(`/blogs/${res.data._id}`);
+    }
   }
 
   useEffect(() => {
