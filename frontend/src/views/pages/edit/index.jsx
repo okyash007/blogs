@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { makePutRequest } from "../../utils/apis/makePutRequest";
 import { useSelector } from "react-redux";
+import { backend_url } from "../../utils/constant";
 
 const index = () => {
   const [blog, setBlog] = useState(null);
@@ -13,7 +14,7 @@ const index = () => {
   const { id } = useParams();
 
   async function getPost(id) {
-    const res = await makeGetRequest(`http://localhost:4000/post/${id}`);
+    const res = await makeGetRequest(`${backend_url}/post/${id}`);
     if (res.success === true) {
       const { user, title, content } = res.data;
       if (user.toString() === loalUser._id) {
@@ -23,7 +24,7 @@ const index = () => {
   }
 
   async function updatePost(id, body) {
-    const res = await makePutRequest(`http://localhost:4000/post/${id}`, body);
+    const res = await makePutRequest(`${backend_url}/post/${id}`, body);
     console.log(res);
   }
 

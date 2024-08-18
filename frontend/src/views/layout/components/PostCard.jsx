@@ -4,7 +4,6 @@ import UserCard from "./UserCard";
 import { Link } from "react-router-dom";
 
 const PostCard = ({ post }) => {
-  console.log(post);
   return (
     <div className="bg-[#ffffff1a] p-5 rounded-2xl flex flex-col gap-3">
       <div className="">

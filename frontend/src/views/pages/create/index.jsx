@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { makePostRequest } from "../../utils/apis/makePostRequest";
 import { useNavigate } from "react-router-dom";
+import { backend_url } from "../../utils/constant";
 
 const index = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const index = () => {
   });
 
   async function createPost(body) {
-    const res = await makePostRequest("http://localhost:4000/post", body);
+    const res = await makePostRequest(`${backend_url}/post`, body);
     if (res.success) {
       localStorage.removeItem("blog");
       navigate(`/blogs/${res.data._id}`);

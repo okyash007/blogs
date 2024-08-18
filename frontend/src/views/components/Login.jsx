@@ -17,6 +17,8 @@ import { makePostRequest } from "../utils/apis/makePostRequest";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
+import { CirCleLoader } from "./Loaders";
+import { backend_url } from "../utils/constant";
 
 const formSchema = z.object({
   email: z
@@ -47,7 +49,7 @@ export function Login() {
   });
 
   async function loginUser(body) {
-    const res = await makePostRequest("http://localhost:4000/user/login", body);
+    const res = await makePostRequest(`${backend_url}/user/login`, body);
     setLoading(false);
     if (res.success == true) {
       const { name, email } = res.data.user;
@@ -95,10 +97,12 @@ export function Login() {
           )}
         />
         {loading ? (
-          <Button className={"mt-4"}>loaing</Button>
+          <Button className={"mt-4"}>
+            <CirCleLoader size={"20"} stroke={"3"} color={"black"} />
+          </Button>
         ) : (
           <Button type="submit" className={"mt-4"}>
-            Login
+            Loading
           </Button>
         )}
       </form>

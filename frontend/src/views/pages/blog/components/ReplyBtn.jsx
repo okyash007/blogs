@@ -23,10 +23,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Onboard from "../../../components/Onboard";
+import { CirCleLoader } from "../../../components/Loaders";
+import { makePostRequest } from "../../../utils/apis/makePostRequest";
+import { backend_url } from "../../../utils/constant";
 
-const ReplyBtn = ({ comment, postReply, commentDrawer, setCommentDrawer }) => {
+const ReplyBtn = ({ comment, getReplies }) => {
   const user = useSelector((store) => store.user.data);
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [commentDrawer, setCommentDrawer] = useState(false);
+
+  async function postReply(id, body) {
+    const res = await makePostRequest(
+      `${backend_url}/comment/${id}`,
+      body
+    );
+    await getReplies(id);
+    setLoading(false);
+    setCommentDrawer(false);
+  }
 
   if (user) {
     return (
@@ -38,7 +53,7 @@ const ReplyBtn = ({ comment, postReply, commentDrawer, setCommentDrawer }) => {
         </DrawerTrigger>
         <DrawerContent className="p-6">
           <div className="flex flex-col gap-3">
-            <div>
+            <div className="">
               <CommentCard comment={comment} />
             </div>
             <div className="relative">
@@ -51,20 +66,31 @@ const ReplyBtn = ({ comment, postReply, commentDrawer, setCommentDrawer }) => {
                   setText(e.target.value);
                 }}
               />
-              <Button
-                disabled={!text ? true : false}
-                className="absolute bottom-2 right-2"
-                variant="ghost"
-                size="icon"
-                onClick={() => {
-                  postReply(comment._id, {
-                    post: comment.post,
-                    content: text,
-                  });
-                }}
-              >
-                <IoSend size={25} />
-              </Button>
+              {loading ? (
+                <Button
+                  className="absolute bottom-2 right-2"
+                  variant="ghost"
+                  size="icon"
+                >
+                  <CirCleLoader size={"20"} stroke={"3"} color="white" />
+                </Button>
+              ) : (
+                <Button
+                  disabled={!text ? true : false}
+                  className="absolute bottom-2 right-2"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => {
+                    setLoading(true);
+                    postReply(comment._id, {
+                      post: comment.post,
+                      content: text,
+                    });
+                  }}
+                >
+                  <IoSend size={25} />
+                </Button>
+              )}
             </div>
           </div>
         </DrawerContent>

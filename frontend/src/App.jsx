@@ -15,6 +15,7 @@ import Private from "./views/layout/Private";
 import { useDispatch, useSelector } from "react-redux";
 import { makeGetRequest } from "./views/utils/apis/makeGetRequest";
 import { setUser } from "./store/userSlice";
+import { backend_url } from "./views/utils/constant";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   async function auth() {
-    const res = await makeGetRequest("http://localhost:4000/user/auth");
+    const res = await makeGetRequest(`${backend_url}/user/auth`);
     setLoading(false);
     if (res.success == true) {
       const { _id, name, email } = res.data.user;

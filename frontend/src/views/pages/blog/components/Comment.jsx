@@ -4,27 +4,21 @@ import { makeGetRequest } from "../../../utils/apis/makeGetRequest";
 import { makePostRequest } from "../../../utils/apis/makePostRequest";
 import CommentCard from "../../../layout/components/CommentCard";
 import ReplyBtn from "./ReplyBtn";
+import { LoaderZoomie } from "../../../components/Loaders";
+import { backend_url } from "../../../utils/constant";
 
 const Comment = ({ comment }) => {
   const [replies, setReplies] = useState(null);
-  const [commentDrawer, setCommentDrawer] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function getReplies(id) {
     const res = await makeGetRequest(
-      `http://localhost:4000/comment/replies/${id}`
+      `${backend_url}/comment/replies/${id}`
     );
+    setLoading(false);
     if (res.success) {
       setReplies(res.data);
     }
-  }
-
-  async function postReply(id, body) {
-    const res = await makePostRequest(
-      `http://localhost:4000/comment/${id}`,
-      body
-    );
-    await getReplies(id);
-    setCommentDrawer(false);
   }
 
   return (
@@ -34,12 +28,7 @@ const Comment = ({ comment }) => {
       </div>
 
       <div className="flex gap-2 ml-12">
-        <ReplyBtn
-          comment={comment}
-          postReply={postReply}
-          commentDrawer={commentDrawer}
-          setCommentDrawer={setCommentDrawer}
-        />
+        <ReplyBtn comment={comment} getReplies={getReplies} />
 
         {replies ? (
           <Badge
@@ -52,17 +41,23 @@ const Comment = ({ comment }) => {
             Hide Replies
           </Badge>
         ) : (
-          comment.replies.length > 0 && (
+          comment.replies.length > 0 &&
+          (loading ? (
+            <Badge variant="secondary" className="cursor-pointer">
+              <LoaderZoomie size={"50"} />
+            </Badge>
+          ) : (
             <Badge
               variant="secondary"
               className="cursor-pointer"
               onClick={() => {
+                setLoading(true);
                 getReplies(comment._id);
               }}
             >
               Show Replies
             </Badge>
-          )
+          ))
         )}
       </div>
       {replies && (

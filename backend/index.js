@@ -28,7 +28,7 @@ export const handler = serverless(app);
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://blogs.okyash.tech"],
     credentials: true,
   })
 );

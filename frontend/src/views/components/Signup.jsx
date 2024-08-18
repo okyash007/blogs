@@ -17,6 +17,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { makePostRequest } from "../utils/apis/makePostRequest";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/userSlice";
+import { CirCleLoader } from "./Loaders";
+import { backend_url } from "../utils/constant";
 
 const formSchema = z.object({
   name: z.string({
@@ -39,6 +43,7 @@ const formSchema = z.object({
 });
 
 export function Signup() {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -50,10 +55,7 @@ export function Signup() {
   });
 
   async function signupUser(body) {
-    const res = await makePostRequest(
-      "http://localhost:4000/user/signup",
-      body
-    );
+    const res = await makePostRequest(`${backend_url}/user/signup`, body);
     setLoading(false);
     if (res.success == true) {
       const { name, email } = res.data.user;
@@ -114,7 +116,9 @@ export function Signup() {
           )}
         />
         {loading ? (
-          <Button className={"mt-4"}>loaing</Button>
+          <Button className={"mt-4"}>
+            <CirCleLoader size={"20"} stroke={"3"} color={"black"} />
+          </Button>
         ) : (
           <Button type="submit" className={"mt-4"}>
             Sign Up

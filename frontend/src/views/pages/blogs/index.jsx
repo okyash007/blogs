@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "../../layout/components/PostCard";
 import { makeGetRequest } from "../../utils/apis/makeGetRequest";
+import { backend_url } from "../../utils/constant";
 
 const index = () => {
   const [blogs, setBlogs] = useState(null);
 
   async function getAllBlogs() {
-    const res = await makeGetRequest("http://localhost:4000/post");
+    const res = await makeGetRequest(`${backend_url}/post`);
     if (res.success === true) {
       setBlogs(res.data);
     }
