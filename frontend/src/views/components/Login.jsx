@@ -29,12 +29,11 @@ const formSchema = z.object({
       message: "Email format is not correct",
     }),
   password: z
-    .string({
-      message: "Password is required",
-    })
-    .min(2, {
-      message: "Password must be at least 2 characters.",
-    }),
+    .string({ message: "password is required" })
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/,
+      { message: "password is not in correct format" }
+    ),
 });
 
 export function Login() {
@@ -52,8 +51,8 @@ export function Login() {
     const res = await makePostRequest(`${backend_url}/user/login`, body);
     setLoading(false);
     if (res.success == true) {
-      const { name, email } = res.data.user;
-      dispatch(setUser({ name, email }));
+      const { name, email, _id, posts, bookmarks } = res.data.user;
+      dispatch(setUser({ name, email, _id, posts, bookmarks }));
       localStorage.setItem("acess_token", res.data.token);
     }
   }

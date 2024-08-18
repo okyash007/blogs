@@ -20,3 +20,8 @@ export const updateUser = async (id, body) => {
   const updatedUser = await User.findByIdAndUpdate(id, body);
   return updatedUser;
 };
+
+export const findUserPopulate = async (id) => {
+  const user = await User.findById(id).populate("posts");
+  return user;
+};

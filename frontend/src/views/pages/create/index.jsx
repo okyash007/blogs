@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Editor from "../../components/Editor";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { z } from "zod";
-import { makePostRequest } from "../../utils/apis/makePostRequest";
 import { useNavigate } from "react-router-dom";
-import { backend_url } from "../../utils/constant";
+import PublishBtn from "./components/PublishBtn";
 
 const index = () => {
   const navigate = useNavigate();
@@ -18,27 +15,6 @@ const index = () => {
         }
   );
 
-  const postSchema = z.object({
-    title: z
-      .string({
-        message: "title is required",
-      })
-      .min(1, { message: "title must be something" }),
-    content: z
-      .string({
-        message: "content is required",
-      })
-      .min(1, { message: "content must be something" }),
-  });
-
-  async function createPost(body) {
-    const res = await makePostRequest(`${backend_url}/post`, body);
-    if (res.success) {
-      localStorage.removeItem("blog");
-      navigate(`/blogs/${res.data._id}`);
-    }
-  }
-
   useEffect(() => {
     localStorage.setItem("blog", JSON.stringify(blog));
   }, [blog]);
@@ -46,19 +22,7 @@ const index = () => {
   return (
     <div>
       <div className="px-[5%] text-right">
-        <Button
-          onClick={() => {
-            const isValid = postSchema.safeParse({
-              title: blog.title,
-              content: JSON.stringify(blog.content),
-            });
-            if (isValid.success === true) {
-              createPost(isValid.data);
-            }
-          }}
-        >
-          Publish
-        </Button>
+        <PublishBtn />
       </div>
       <div className="mb-4 " style={{ marginInline: "50px" }}>
         <Input

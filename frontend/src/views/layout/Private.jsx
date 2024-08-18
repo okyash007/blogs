@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { setUser } from "../../store/userSlice";
+import UserCard from "./components/UserCard";
 
 const Private = () => {
   const user = useSelector((store) => store.user.data);
@@ -35,11 +36,13 @@ const Private = () => {
                   <Button variant="ghost">{user.name}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>
-                    <p>{user.email}</p>
-                  </DropdownMenuLabel>
+                  <DropdownMenuItem>
+                    <UserCard user={user} email={true} />
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <Link to={"/profile/edit"}>
+                    <DropdownMenuItem>Edit Profile</DropdownMenuItem>
+                  </Link>
                   <Link to={"/create"}>
                     <DropdownMenuItem>Create Blog</DropdownMenuItem>
                   </Link>
