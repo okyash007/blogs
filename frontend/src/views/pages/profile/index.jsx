@@ -41,7 +41,7 @@ const index = () => {
         {user.posts.map((m) => {
           return (
             <div className="bg-[#ffffff1a] p-5 rounded-2xl relative">
-              {localUser._id === user._id && (
+              {localUser && localUser._id === user._id && (
                 <Link to={`/edit/${m._id}`}>
                   <Badge className="absolute bottom-5 left-5 cursor-pointer">
                     edit
