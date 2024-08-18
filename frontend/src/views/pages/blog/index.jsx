@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Comments from "./components/Comments";
 import { LoaderZoomie } from "../../components/Loaders";
 import { backend_url } from "../../utils/constant";
+import UserCard from "../../layout/components/UserCard";
 
 const index = () => {
   const [blog, setBlog] = useState(null);
@@ -13,9 +14,10 @@ const index = () => {
 
   async function getPost(id) {
     const res = await makeGetRequest(`${backend_url}/post/${id}`);
+    console.log(res);
     if (res.success === true) {
-      const { _id, title, content, comments } = res.data;
-      setBlog({ title, content: JSON.parse(content), comments, _id });
+      const { _id, title, content, comments, user } = res.data;
+      setBlog({ title, content: JSON.parse(content), comments, _id, user });
     }
   }
   useEffect(() => {
@@ -32,6 +34,9 @@ const index = () => {
 
   return (
     <div className="pb-[5%]">
+      <div className="mb-6 mx-[5%]">
+        <UserCard user={blog.user} />
+      </div>
       <div className="mb-4 mx-[5%]">
         <h1 className="text-5xl font-bold tracking-wide">{blog.title}</h1>
       </div>

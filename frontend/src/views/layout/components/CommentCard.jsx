@@ -5,7 +5,7 @@ const CommentCard = ({ comment }) => {
   return (
     <div>
       <UserCard user={comment.user} />
-      <p className="ml-14 line-clamp-2">{comment.content}</p>
+      <p className="ml-14">{comment.content}</p>
     </div>
   );
 };

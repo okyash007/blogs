@@ -7,48 +7,48 @@ import { Button } from "@/components/ui/button";
 import { makePutRequest } from "../../utils/apis/makePutRequest";
 import { useSelector } from "react-redux";
 import { backend_url } from "../../utils/constant";
+import { LoaderZoomie } from "../../components/Loaders";
+import UpdateBtn from "./components/UpdateBtn";
 
 const index = () => {
   const [blog, setBlog] = useState(null);
-  const loalUser = useSelector((store) => store.user.data);
+  const localUser = useSelector((store) => store.user.data);
   const { id } = useParams();
 
   async function getPost(id) {
     const res = await makeGetRequest(`${backend_url}/post/${id}`);
     if (res.success === true) {
       const { user, title, content } = res.data;
-      if (user.toString() === loalUser._id) {
+      if (user._id.toString() === localUser._id) {
         setBlog({ title, content: JSON.parse(content) });
       }
     }
-  }
-
-  async function updatePost(id, body) {
-    const res = await makePutRequest(`${backend_url}/post/${id}`, body);
-    console.log(res);
   }
 
   useEffect(() => {
     getPost(id);
   }, []);
 
+  if (!localUser.posts.includes(id)) {
+    return (
+      <div className="flex justify-center">
+        <p className="text-xs text-[#ffffff3a]">You can edit your posts only</p>
+      </div>
+    );
+  }
+
   if (!blog) {
-    return <div className="flex justify-center">loading</div>;
+    return (
+      <div className="flex justify-center">
+        <LoaderZoomie size="80" />
+      </div>
+    );
   }
 
   return (
     <div>
       <div className="px-[5%] text-right">
-        <Button
-          onClick={() => {
-            updatePost(id, {
-              title: blog.title,
-              content: JSON.stringify(blog.content),
-            });
-          }}
-        >
-          Update
-        </Button>
+        <UpdateBtn blog={blog} />
       </div>
       <div className="mb-4" style={{ marginInline: "50px" }}>
         <Input

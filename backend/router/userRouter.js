@@ -1,8 +1,10 @@
 import { Router } from "express";
 import {
   userAuth,
+  userFind,
   userLogin,
   userSignup,
+  userUpdate,
 } from "../controllers/userController.js";
 import { userAccessSchema, userCreateSchema } from "../zod/schema.js";
 import { validateZodSchema } from "../middlewares/validateZodSchema.js";
@@ -15,3 +17,7 @@ userRouter
   .post(validateZodSchema(userCreateSchema), userSignup);
 userRouter.route("/login").post(validateZodSchema(userAccessSchema), userLogin);
 userRouter.route("/auth").get(verifyToken, userAuth);
+userRouter.route("/:id").get(userFind);
+userRouter
+  .route("/update")
+  .post(verifyToken, validateZodSchema(userCreateSchema), userUpdate);

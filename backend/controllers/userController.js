@@ -1,4 +1,10 @@
-import { createUser, findUser, findUserById } from "../services/userService.js";
+import {
+  createUser,
+  findUser,
+  findUserById,
+  findUserPopulate,
+  updateUser,
+} from "../services/userService.js";
 import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -41,4 +47,30 @@ export const userAuth = asyncHandler(async (req, res, next) => {
     return next(new apiError(400, ["user not found"]));
   }
   return res.json(new apiResponse(200, { user }));
+});
+
+export const userFind = asyncHandler(async (req, res) => {
+  const user = await findUserPopulate(req.params.id);
+  if (!user) {
+    return next(new apiError(400, ["user not found"]));
+  }
+  const { password, bookmarks, ...rest } = user._doc;
+  return res.json(new apiResponse(200, rest));
+});
+
+export const userUpdate = asyncHandler(async (req, res, next) => {
+  const { name, email, password } = req.body;
+  const user = await findUserById(req.user.id);
+
+  if (!user) {
+    return next(new apiError(400, ["user not found"]));
+  }
+
+  const isPasswordCorrect = matchPassword(password, user.password);
+  if (!isPasswordCorrect) {
+    return next(new apiError(400, ["incorrect password"]));
+  }
+
+  await updateUser(req.user.id, { name, email });
+  res.json(new apiResponse(200));
 });
