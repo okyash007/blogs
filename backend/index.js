@@ -4,6 +4,9 @@ import cors from "cors";
 import connectDb from "./db/connectDb.js";
 import serverless from "serverless-http";
 import { errorMiddleWare } from "./middlewares/errorMiddleWare.js";
+import { userRouter } from "./router/userRouter.js";
+import { postRouter } from "./router/postRouter.js";
+import { commentRouter } from "./router/commentRouter.js";
 
 dotenv.config({
   path: "./.env",
@@ -25,7 +28,7 @@ export const handler = serverless(app);
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://blogs.okyash.tech"],
     credentials: true,
   })
 );
@@ -36,5 +39,9 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.get("/", (req, res) => {
   res.json({ status: "active" });
 });
+
+app.use("/user", userRouter);
+app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 app.use(errorMiddleWare);
