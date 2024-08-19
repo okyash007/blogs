@@ -34,10 +34,7 @@ const ReplyBtn = ({ comment, getReplies }) => {
   const [commentDrawer, setCommentDrawer] = useState(false);
 
   async function postReply(id, body) {
-    const res = await makePostRequest(
-      `${backend_url}/comment/${id}`,
-      body
-    );
+    const res = await makePostRequest(`${backend_url}/comment/${id}`, body);
     await getReplies(id);
     setLoading(false);
     setCommentDrawer(false);
@@ -54,7 +51,7 @@ const ReplyBtn = ({ comment, getReplies }) => {
         <DrawerContent className="p-6">
           <div className="flex flex-col gap-3">
             <div className="">
-              <CommentCard comment={comment} />
+              <CommentCard comment={comment} isReply={true} />
             </div>
             <div className="relative">
               <textarea
