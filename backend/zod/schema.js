@@ -10,6 +10,7 @@ const passwordSchema = z
 
 export const userCreateSchema = z.object({
   name: z.string({ message: "name is required" }),
+  profile_image: z.string().optional(),
   email: z
     .string({ message: "email is required" })
     .email({ message: "email in not in correct format" }),

@@ -22,7 +22,7 @@ const index = () => {
   return (
     <div>
       <div className="px-[5%] text-right">
-        <PublishBtn />
+        <PublishBtn blog={blog} />
       </div>
       <div className="mb-4 " style={{ marginInline: "50px" }}>
         <Input

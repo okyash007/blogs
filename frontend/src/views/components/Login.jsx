@@ -51,8 +51,8 @@ export function Login() {
     const res = await makePostRequest(`${backend_url}/user/login`, body);
     setLoading(false);
     if (res.success == true) {
-      const { name, email, _id, posts, bookmarks } = res.data.user;
-      dispatch(setUser({ name, email, _id, posts, bookmarks }));
+      const { name, email, _id, posts, bookmarks, profile_image } = res.data.user;
+      dispatch(setUser({ name, email, _id, posts, bookmarks, profile_image }));
       localStorage.setItem("acess_token", res.data.token);
     }
   }

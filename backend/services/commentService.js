@@ -23,7 +23,7 @@ export const findComentWithReplies = async (id) => {
       path: "replies",
       populate: {
         path: "user",
-        select: "name email"
+        select: "name email profile_image"
       },
     })
     .exec();

@@ -14,7 +14,6 @@ const index = () => {
 
   async function getUser(id) {
     const res = await makeGetRequest(`${backend_url}/user/${id}`);
-    console.log(res.data);
     if (res.success) {
       setUser(res.data);
     }

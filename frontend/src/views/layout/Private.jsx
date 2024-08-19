@@ -14,6 +14,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { setUser } from "../../store/userSlice";
 import UserCard from "./components/UserCard";
+import { FiUser } from "react-icons/fi";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Private = () => {
   const user = useSelector((store) => store.user.data);
@@ -33,7 +35,13 @@ const Private = () => {
             <div>
               <DropdownMenu>
                 <DropdownMenuTrigger>
-                  <Button variant="ghost">{user.name}</Button>
+                  {/* <Button variant="ghost">{user.name}</Button> */}
+                  <Avatar className="hover:outline">
+                    <AvatarImage src={user.profile_image} />
+                    <AvatarFallback>
+                      <FiUser size={25} />
+                    </AvatarFallback>
+                  </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>

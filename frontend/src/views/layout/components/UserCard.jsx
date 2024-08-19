@@ -1,14 +1,17 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
+import { FiUser } from "react-icons/fi";
 
 const UserCard = ({ user, email }) => {
   return (
     <div className="flex items-center gap-3">
       <div>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src={user.profile_image} />
+          <AvatarFallback>
+            <FiUser size={25} />
+          </AvatarFallback>
         </Avatar>
       </div>
       <div>
