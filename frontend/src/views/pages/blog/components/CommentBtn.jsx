@@ -53,8 +53,8 @@ const CommentBtn = ({ post, setThisComments }) => {
           <div className="relative mt-4">
             <textarea
               placeholder="type your comment here ........"
-              className="p-0 border-0 focus:outline-none w-full bg-[#000000]"
-              rows={20}
+              className="p-0 border-0 focus:outline-none w-full bg-[#00000000]"
+              rows={15}
               value={text}
               onChange={(e) => {
                 setText(e.target.value);
