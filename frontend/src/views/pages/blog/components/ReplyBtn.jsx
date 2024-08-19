@@ -55,9 +55,9 @@ const ReplyBtn = ({ comment, getReplies }) => {
             </div>
             <div className="relative">
               <textarea
-                rows={20}
+                rows={15}
                 placeholder="type your reply here ........"
-                className="p-0 border-0 focus:outline-none w-full bg-[#000000]"
+                className="p-0 border-0 focus:outline-none w-full bg-[#00000000]"
                 value={text}
                 onChange={(e) => {
                   setText(e.target.value);
