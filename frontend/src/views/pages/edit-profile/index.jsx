@@ -21,6 +21,7 @@ import { makePostRequest } from "../../utils/apis/makePostRequest";
 import { setUser } from "../../../store/userSlice";
 import { CirCleLoader } from "../../components/Loaders";
 import { backend_url } from "../../utils/constant";
+import ImageUpload from "./components/ImageUpload";
 
 const formSchema = z.object({
   name: z.string({
@@ -45,6 +46,7 @@ function index() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const user = useSelector((store) => store.user.data);
+  const [image, setImage] = useState(user.profile_image);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,13 +60,13 @@ function index() {
     const res = await makePostRequest(`${backend_url}/user/update`, body);
     setLoading(false);
     if (res.success == true) {
-      dispatch(setUser({ ...user, name: body.name, email: body.email }));
+      dispatch(setUser({ ...user, ...body }));
     }
   }
 
   function onSubmit(values) {
     setLoading(true);
-    signupUser(values);
+    signupUser({ ...values, profile_image: image });
   }
 
   return (
@@ -77,6 +79,7 @@ function index() {
           <h1 className="text-3xl font-extrabold tracking-wide">
             Edit Profile
           </h1>
+          <ImageUpload image={image} setImage={setImage} />
           <FormField
             control={form.control}
             name="name"

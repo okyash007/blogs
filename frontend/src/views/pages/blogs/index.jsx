@@ -27,6 +27,7 @@ const index = () => {
     );
   }
 
+
   return (
     <div className="p-[5%] flex justify-center">
       <div className="w-[50%] min-w-[350px] flex flex-col gap-3">

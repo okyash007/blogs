@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { makePostRequest } from "../../../utils/apis/makePostRequest";
 import { backend_url } from "../../../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
+import { CirCleLoader } from "../../../components/Loaders";
 
 const PublishBtn = ({ blog }) => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const postSchema = z.object({
     title: z
@@ -22,27 +24,37 @@ const PublishBtn = ({ blog }) => {
 
   async function createPost(body) {
     const res = await makePostRequest(`${backend_url}/post`, body);
+    setLoading(false);
     if (res.success) {
       localStorage.removeItem("blog");
       navigate(`/blogs/${res.data._id}`);
     }
   }
 
-  return (
-    <Button
-      onClick={() => {
-        const isValid = postSchema.safeParse({
-          title: blog.title,
-          content: JSON.stringify(blog.content),
-        });
-        if (isValid.success === true) {
-          createPost(isValid.data);
-        }
-      }}
-    >
-      Publish
-    </Button>
-  );
+  if (loading) {
+    return (
+      <Button className="px-8">
+        <CirCleLoader color="black" size="20" stroke="3" />
+      </Button>
+    );
+  } else {
+    return (
+      <Button
+        onClick={() => {
+          const isValid = postSchema.safeParse({
+            title: blog.title,
+            content: JSON.stringify(blog.content),
+          });
+          if (isValid.success === true) {
+            setLoading(true);
+            createPost(isValid.data);
+          }
+        }}
+      >
+        Publish
+      </Button>
+    );
+  }
 };
 
 export default PublishBtn;

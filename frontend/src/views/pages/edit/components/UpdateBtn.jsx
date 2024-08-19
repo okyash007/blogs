@@ -12,7 +12,6 @@ const UpdateBtn = ({ blog }) => {
   async function updatePost(id, body) {
     const res = await makePutRequest(`${backend_url}/post/${id}`, body);
     setLoading(false);
-    console.log(res);
   }
 
   if (loading) {

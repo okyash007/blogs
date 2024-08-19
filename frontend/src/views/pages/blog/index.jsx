@@ -14,7 +14,6 @@ const index = () => {
 
   async function getPost(id) {
     const res = await makeGetRequest(`${backend_url}/post/${id}`);
-    console.log(res);
     if (res.success === true) {
       const { _id, title, content, comments, user } = res.data;
       setBlog({ title, content: JSON.parse(content), comments, _id, user });

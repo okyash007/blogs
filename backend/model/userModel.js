@@ -4,6 +4,7 @@ import { apiError } from "../utils/apiError.js";
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, require: true },
+    profile_image: { type: String, default: "" },
     email: {
       type: String,
       require: true,

@@ -7,6 +7,8 @@ import { errorMiddleWare } from "./middlewares/errorMiddleWare.js";
 import { userRouter } from "./router/userRouter.js";
 import { postRouter } from "./router/postRouter.js";
 import { commentRouter } from "./router/commentRouter.js";
+import { imageUpload, upload } from "./controllers/imageUploadController.js";
+import fs from "fs";
 
 dotenv.config({
   path: "./.env",
@@ -43,5 +45,6 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/comment", commentRouter);
+app.post("/image-upload", upload.single("file"), imageUpload);
 
 app.use(errorMiddleWare);

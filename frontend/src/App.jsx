@@ -29,9 +29,9 @@ function App() {
     const res = await makeGetRequest(`${backend_url}/user/auth`);
     setLoading(false);
     if (res.success == true) {
-      const { _id, name, email, posts, bookmarks } = res.data.user;
-      console.log(res.data.user);
-      dispatch(setUser({ _id, name, email, posts, bookmarks }));
+      const { _id, name, email, posts, bookmarks, profile_image } =
+        res.data.user;
+      dispatch(setUser({ _id, name, email, posts, bookmarks, profile_image }));
     }
   }
 

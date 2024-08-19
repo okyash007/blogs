@@ -59,7 +59,7 @@ export const userFind = asyncHandler(async (req, res) => {
 });
 
 export const userUpdate = asyncHandler(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, profile_image, password } = req.body;
   const user = await findUserById(req.user.id);
 
   if (!user) {
@@ -71,6 +71,6 @@ export const userUpdate = asyncHandler(async (req, res, next) => {
     return next(new apiError(400, ["incorrect password"]));
   }
 
-  await updateUser(req.user.id, { name, email });
+  await updateUser(req.user.id, { name, email, profile_image });
   res.json(new apiResponse(200));
 });
