@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import UserCard from "./UserCard";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { formatDateTime } from "../../utils/helper";
 
 const PostCard = ({ post }) => {
   return (
@@ -15,7 +16,9 @@ const PostCard = ({ post }) => {
         </Link>
       </div>
       <div className="flex justify-end gap-3">
-        <Badge>{post.createdAt}</Badge>
+        <Badge>{`${formatDateTime(post.createdAt).date} ${` `} ${
+          formatDateTime(post.createdAt).time
+        }`}</Badge>
       </div>
     </div>
   );

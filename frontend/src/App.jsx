@@ -19,6 +19,7 @@ import { makeGetRequest } from "./views/utils/apis/makeGetRequest";
 import { setUser } from "./store/userSlice";
 import { backend_url } from "./views/utils/constant";
 import { CirCleLoader } from "./views/components/Loaders";
+import { Toaster } from "@/components/ui/sonner";
 
 function App() {
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       <RouterProvider router={appRouter} />
     </>
   );

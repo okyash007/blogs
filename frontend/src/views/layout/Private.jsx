@@ -16,6 +16,8 @@ import { setUser } from "../../store/userSlice";
 import UserCard from "./components/UserCard";
 import { FiUser } from "react-icons/fi";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { toast } from "sonner";
+import Success from "./toast/Success";
 
 const Private = () => {
   const user = useSelector((store) => store.user.data);
@@ -61,6 +63,7 @@ const Private = () => {
                     onClick={() => {
                       dispatch(setUser(null));
                       localStorage.clear();
+                      toast(<Success message={"Succesfullt loged out"} />);
                     }}
                   >
                     Log Out

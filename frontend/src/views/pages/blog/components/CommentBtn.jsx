@@ -25,6 +25,9 @@ import {
 } from "@/components/ui/dialog";
 import { CirCleLoader } from "../../../components/Loaders";
 import { backend_url } from "../../../utils/constant";
+import { toast } from "sonner";
+import Success from "../../../layout/toast/Success";
+import Error from "../../../layout/toast/Error";
 
 const CommentBtn = ({ post, setThisComments }) => {
   const user = useSelector((store) => store.user.data);
@@ -40,6 +43,9 @@ const CommentBtn = ({ post, setThisComments }) => {
         return [...prev, { ...res.data, user }];
       });
       setCommentModal(false);
+      toast(<Success message={"Comment added succesfully"} />);
+    } else {
+      toast(<Error />);
     }
   }
 
@@ -66,7 +72,7 @@ const CommentBtn = ({ post, setThisComments }) => {
                 variant="ghost"
                 size="icon"
               >
-                <CirCleLoader size={"20"} stroke={"3"} color="white"/>
+                <CirCleLoader size={"20"} stroke={"3"} color="white" />
               </Button>
             ) : (
               <Button

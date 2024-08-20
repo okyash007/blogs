@@ -4,6 +4,8 @@ import { makePutRequest } from "../../../utils/apis/makePutRequest";
 import { backend_url } from "../../../utils/constant";
 import { Button } from "@/components/ui/button";
 import { CirCleLoader } from "../../../components/Loaders";
+import Success from "../../../layout/toast/Success";
+import { toast } from "sonner";
 
 const UpdateBtn = ({ blog }) => {
   const { id } = useParams();
@@ -12,6 +14,11 @@ const UpdateBtn = ({ blog }) => {
   async function updatePost(id, body) {
     const res = await makePutRequest(`${backend_url}/post/${id}`, body);
     setLoading(false);
+    if (res.success) {
+      toast(<Success message={"Blog Updated succesfully"} />);
+    } else {
+      toast(<Error />);
+    }
   }
 
   if (loading) {

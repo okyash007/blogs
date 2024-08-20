@@ -22,6 +22,9 @@ import { setUser } from "../../../store/userSlice";
 import { CirCleLoader } from "../../components/Loaders";
 import { backend_url } from "../../utils/constant";
 import ImageUpload from "./components/ImageUpload";
+import { toast } from "sonner";
+import Success from "../../layout/toast/Success";
+import Error from "../../layout/toast/Error";
 
 const formSchema = z.object({
   name: z.string({
@@ -56,17 +59,20 @@ function index() {
     },
   });
 
-  async function signupUser(body) {
+  async function updateUser(body) {
     const res = await makePostRequest(`${backend_url}/user/update`, body);
     setLoading(false);
     if (res.success == true) {
       dispatch(setUser({ ...user, ...body }));
+      toast(<Success message={"Profile updated successfully"} />);
+    } else {
+      toast(<Error />);
     }
   }
 
   function onSubmit(values) {
     setLoading(true);
-    signupUser({ ...values, profile_image: image });
+    updateUser({ ...values, profile_image: image });
   }
 
   return (

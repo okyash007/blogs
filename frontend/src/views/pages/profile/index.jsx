@@ -6,6 +6,7 @@ import UserCard from "../../layout/components/UserCard";
 import PostCard from "../../layout/components/PostCard";
 import { Badge } from "@/components/ui/badge";
 import { useSelector } from "react-redux";
+import { formatDateTime } from "../../utils/helper";
 
 const index = () => {
   const { id } = useParams();
@@ -33,7 +34,9 @@ const index = () => {
         <UserCard user={user} />
         <div>
           <p className="text-right text-xs text-[#ffffff5a]">Joined on</p>
-          <Badge>{user.createdAt}</Badge>
+          <p className="text-right text-xs text-[#ffffff5a]">
+            {`${formatDateTime(user.createdAt).date}`}
+          </p>
         </div>
       </div>
       <div className="space-y-3">
