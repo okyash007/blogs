@@ -8,6 +8,9 @@ import { Label } from "@/components/ui/label";
 import { MdEdit } from "react-icons/md";
 import { CirCleLoader } from "../../../components/Loaders";
 
+const CLOUD_NAME = "duslrhgcq";
+const UPLOAD_PRESET = "zyxcfmzj";
+
 const ImageUpload = ({ image, setImage }) => {
   const [localImage, setLocalImage] = useState(image);
   const [loading, setLoading] = useState(false);
@@ -24,15 +27,20 @@ const ImageUpload = ({ image, setImage }) => {
   async function uploadImage(file) {
     const formData = new FormData();
     formData.append("file", file);
-    const response = await fetch(`${backend_url}/image-upload`, {
-      method: "POST",
-      body: formData,
-    });
+    formData.append("upload_preset", UPLOAD_PRESET);
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     const result = await response.json();
+    console.log(result);
     setLoading(false);
-    if (result.success === true) {
-      setImage(result.data.image_url);
+    if (result.url) {
+      setImage(result.url);
     } else {
       setLocalImage(image);
     }
