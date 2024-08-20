@@ -37,7 +37,10 @@ const Private = () => {
                 <DropdownMenuTrigger>
                   {/* <Button variant="ghost">{user.name}</Button> */}
                   <Avatar className="hover:outline">
-                    <AvatarImage src={user.profile_image} />
+                    <AvatarImage
+                      src={user.profile_image}
+                      className="object-cover"
+                    />
                     <AvatarFallback>
                       <FiUser size={25} />
                     </AvatarFallback>
