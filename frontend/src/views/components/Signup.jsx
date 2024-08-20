@@ -21,6 +21,9 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
 import { CirCleLoader } from "./Loaders";
 import { backend_url } from "../utils/constant";
+import { toast } from "sonner";
+import Error from "../layout/toast/Error";
+import Success from "../layout/toast/Success";
 
 const formSchema = z.object({
   name: z.string({
@@ -61,6 +64,9 @@ export function Signup() {
         res.data.user;
       dispatch(setUser({ name, email, _id, posts, bookmarks, profile_image }));
       localStorage.setItem("acess_token", res.data.token);
+      toast(<Success message={"Signup succesful"}/>)
+    } else {
+      toast(<Error />);
     }
   }
 

@@ -26,6 +26,9 @@ import Onboard from "../../../components/Onboard";
 import { CirCleLoader } from "../../../components/Loaders";
 import { makePostRequest } from "../../../utils/apis/makePostRequest";
 import { backend_url } from "../../../utils/constant";
+import { toast } from "sonner";
+import Success from "../../../layout/toast/Success";
+import Error from "../../../layout/toast/Error";
 
 const ReplyBtn = ({ comment, getReplies }) => {
   const user = useSelector((store) => store.user.data);
@@ -38,6 +41,12 @@ const ReplyBtn = ({ comment, getReplies }) => {
     await getReplies(id);
     setLoading(false);
     setCommentDrawer(false);
+    console.log(res);
+    if (res.success) {
+      toast(<Success message={"Replied succesfully"} />);
+    } else {
+      toast(<Error />);
+    }
   }
 
   if (user) {

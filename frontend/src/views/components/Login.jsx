@@ -19,6 +19,9 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
 import { CirCleLoader } from "./Loaders";
 import { backend_url } from "../utils/constant";
+import { toast } from "sonner";
+import Error from "../layout/toast/Error";
+import Success from "../layout/toast/Success";
 
 const formSchema = z.object({
   email: z
@@ -51,9 +54,13 @@ export function Login() {
     const res = await makePostRequest(`${backend_url}/user/login`, body);
     setLoading(false);
     if (res.success == true) {
-      const { name, email, _id, posts, bookmarks, profile_image } = res.data.user;
+      const { name, email, _id, posts, bookmarks, profile_image } =
+        res.data.user;
       dispatch(setUser({ name, email, _id, posts, bookmarks, profile_image }));
       localStorage.setItem("acess_token", res.data.token);
+      toast(<Success message={"Successfullt loged in"} />);
+    } else {
+      toast(<Error message={res.message} />);
     }
   }
 
@@ -101,7 +108,7 @@ export function Login() {
           </Button>
         ) : (
           <Button type="submit" className={"mt-4"}>
-            Loading
+            Login
           </Button>
         )}
       </form>

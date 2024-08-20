@@ -7,6 +7,9 @@ import { z } from "zod";
 import { CirCleLoader } from "../../../components/Loaders";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../../../store/userSlice";
+import { toast } from "sonner";
+import Success from "../../../layout/toast/Success";
+import Error from "../../../layout/toast/Error";
 
 const PublishBtn = ({ blog }) => {
   const user = useSelector((store) => store.user.data);
@@ -34,6 +37,9 @@ const PublishBtn = ({ blog }) => {
       localStorage.removeItem("blog");
       dispatch(setUser({ ...user, posts: [...user.posts, res.data._id] }));
       navigate(`/blogs/${res.data._id}`);
+      toast(<Success message={"Blog created successfully"} />);
+    } else {
+      toast(<Error />);
     }
   }
 
