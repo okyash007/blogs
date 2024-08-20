@@ -49,7 +49,7 @@ const ImageUpload = ({ image, setImage }) => {
   return (
     <div className="relative w-max">
       <Avatar className="h-28 w-28">
-        <AvatarImage src={localImage} />
+        <AvatarImage src={localImage} className="object-cover" />
         <AvatarFallback>
           <FiUser size={55} />
         </AvatarFallback>

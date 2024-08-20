@@ -8,7 +8,7 @@ const UserCard = ({ user, email }) => {
     <div className="flex items-center gap-3">
       <div>
         <Avatar>
-          <AvatarImage src={user.profile_image} />
+          <AvatarImage src={user.profile_image} className="object-cover"/>
           <AvatarFallback>
             <FiUser size={25} />
           </AvatarFallback>
