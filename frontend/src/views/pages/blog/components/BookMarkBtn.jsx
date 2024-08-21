@@ -17,7 +17,7 @@ const BookMarkBtn = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  async function bookmarkToggle(params) {
+  async function bookmarkToggle(id) {
     const res = await makeGetRequest(`${backend_url}/user/bookmark/${id}`);
     setLoading(false);
     if (res.success) {
@@ -49,7 +49,7 @@ const BookMarkBtn = () => {
       variant="secondary"
       onClick={() => {
         setLoading(true);
-        bookmarkToggle();
+        bookmarkToggle(id);
       }}
     >
       {user.bookmarks.includes(id) ? (
