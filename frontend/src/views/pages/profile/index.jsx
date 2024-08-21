@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useSelector } from "react-redux";
 import { formatDateTime } from "../../utils/helper";
 import { LoaderZoomie } from "../../components/Loaders";
+import DeleteBtn from "./components/DeleteBtn";
 
 const index = () => {
   const { id } = useParams();
@@ -26,7 +27,11 @@ const index = () => {
   }, [id]);
 
   if (!user) {
-    return <div className="text-center"><LoaderZoomie size="80" /></div>;
+    return (
+      <div className="text-center">
+        <LoaderZoomie size="80" />
+      </div>
+    );
   }
 
   return (
@@ -48,11 +53,12 @@ const index = () => {
               key={m._id}
             >
               {localUser && localUser._id === user._id && (
-                <Link to={`/edit/${m._id}`}>
-                  <Badge className="absolute bottom-5 left-5 cursor-pointer">
-                    edit
-                  </Badge>
-                </Link>
+                <div className="flex gap-2 absolute bottom-5 left-5 ">
+                  <Link to={`/edit/${m._id}`}>
+                    <Badge className="cursor-pointer">edit</Badge>
+                  </Link>
+                  <DeleteBtn id={m._id} />
+                </div>
               )}
               <PostCard post={m} />
             </div>

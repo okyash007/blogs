@@ -38,3 +38,8 @@ export const findUserBookmarks = async (id) => {
   });
   return user;
 };
+
+export const findUsers = async (filter) => {
+  const user = await User.find(filter);
+  return user;
+};

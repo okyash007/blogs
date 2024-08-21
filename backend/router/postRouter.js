@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   postAll,
   postCreate,
+  postDelete,
   postFind,
   postUpdate,
 } from "../controllers/postController.js";
@@ -22,3 +23,4 @@ postRouter
   .put(verifyToken, validateZodSchema(postUpdateSchema), postUpdate);
 
 postRouter.route("/:id").get(postFind);
+postRouter.route("/:id").delete(verifyToken, postDelete);

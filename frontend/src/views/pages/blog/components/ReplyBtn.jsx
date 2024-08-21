@@ -89,7 +89,6 @@ const ReplyBtn = ({ comment, getReplies }) => {
                   onClick={() => {
                     setLoading(true);
                     postReply(comment._id, {
-                      post: comment.post,
                       content: text,
                     });
                   }}

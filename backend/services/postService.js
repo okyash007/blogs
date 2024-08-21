@@ -34,10 +34,22 @@ export const findPostPopulated = async (id) => {
   return post;
 };
 
-export const findAllPosts = async () => {
-  const posts = await Post.find().populate({
+export const findAllPosts = async (searchText) => {
+  let query = {};
+
+  if (searchText) {
+    query = { title: { $regex: searchText, $options: "i" } };
+  }
+
+  const posts = await Post.find(query).populate({
     path: "user",
     select: "name email profile_image",
   });
+
   return posts;
+};
+
+export const deletePost = async (id) => {
+  const post = await Post.findByIdAndDelete(id);
+  return post;
 };
