@@ -7,6 +7,7 @@ import PostCard from "../../layout/components/PostCard";
 import { Badge } from "@/components/ui/badge";
 import { useSelector } from "react-redux";
 import { formatDateTime } from "../../utils/helper";
+import { LoaderZoomie } from "../../components/Loaders";
 
 const index = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ const index = () => {
   }, [id]);
 
   if (!user) {
-    return <div className="text-center">loading</div>;
+    return <div className="text-center"><LoaderZoomie size="80" /></div>;
   }
 
   return (
