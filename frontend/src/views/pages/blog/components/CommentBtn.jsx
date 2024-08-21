@@ -53,7 +53,9 @@ const CommentBtn = ({ post, setThisComments }) => {
     return (
       <Drawer open={commentModal} onOpenChange={setCommentModal}>
         <DrawerTrigger>
-          <Button className="cursor-pointer">Comment</Button>
+          <Button variant="secondary" className="cursor-pointer">
+            Comment
+          </Button>
         </DrawerTrigger>
         <DrawerContent className="p-6">
           <div className="relative mt-4">

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   userAuth,
+  userBookmarkToggle,
   userFind,
   userLogin,
   userSignup,
@@ -21,3 +22,4 @@ userRouter.route("/:id").get(userFind);
 userRouter
   .route("/update")
   .post(verifyToken, validateZodSchema(userCreateSchema), userUpdate);
+userRouter.route("/bookmark/:id").get(verifyToken, userBookmarkToggle);

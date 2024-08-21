@@ -28,3 +28,18 @@ export function formatDateTime(isoString) {
     time: formattedTime,
   };
 }
+
+export function copyToClipboard(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log("Text copied to clipboard.");
+      })
+      .catch((err) => {
+        console.error("Could not copy text: ", err);
+      });
+  } else {
+    console.warn("Clipboard API not available.");
+  }
+}
