@@ -27,10 +27,10 @@ const index = () => {
     );
   }
 
-
   return (
-    <div className="p-[5%] flex justify-center">
-      <div className="w-[50%] min-w-[350px] flex flex-col gap-3">
+    <div className="p-[5%] space-y-4">
+      <h1 className="text-3xl">Blogs </h1>
+      <div className="space-y-3">
         {blogs.map((m) => {
           return <Post key={m._id} post={m} />;
         })}

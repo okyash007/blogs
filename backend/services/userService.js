@@ -25,3 +25,16 @@ export const findUserPopulate = async (id) => {
   const user = await User.findById(id).populate("posts");
   return user;
 };
+
+export const findUserBookmarks = async (id) => {
+  const user = await User.findById(id).populate({
+    path: "bookmarks", // Populate top-level comments
+    populate: [
+      {
+        path: "user", // Populate the user who created the comment
+        select: "name email profile_image",
+      },
+    ],
+  });
+  return user;
+};
