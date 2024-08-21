@@ -3,6 +3,7 @@ import { makeGetRequest } from "../../utils/apis/makeGetRequest";
 import { backend_url } from "../../utils/constant";
 import PostCard from "../../layout/components/PostCard";
 import UserCard from "../../layout/components/UserCard";
+import { LoaderZoomie } from "../../components/Loaders";
 
 const index = () => {
   const [bookmarks, setBookmarks] = useState(null);
@@ -19,7 +20,11 @@ const index = () => {
   }, []);
 
   if (!bookmarks) {
-    return <div className="text-center">Loading</div>;
+    return (
+      <div className="text-center">
+        <LoaderZoomie size="80" />
+      </div>
+    );
   }
 
   if (bookmarks.length === 0) {
