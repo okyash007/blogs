@@ -74,3 +74,24 @@ export const userUpdate = asyncHandler(async (req, res, next) => {
   await updateUser(req.user.id, { name, email, profile_image });
   res.json(new apiResponse(200));
 });
+
+export const userBookmarkToggle = asyncHandler(async (req, res, next) => {
+  const user = await findUserById(req.user.id);
+
+  if (!user) {
+    return next(new apiError(400, ["user not found"]));
+  }
+
+  if (user.bookmarks.includes(req.params.id)) {
+    const newBookmarks = user.bookmarks.filter(
+      (f) => f.toString() !== req.params.id
+    );
+    await updateUser(req.user.id, { bookmarks: newBookmarks });
+    return res.json(new apiResponse(200, undefined, "Bookmark removed"));
+  } else {
+    await updateUser(req.user.id, {
+      bookmarks: [...user.bookmarks, req.params.id],
+    });
+    return res.json(new apiResponse(200, undefined, "Bookmark added"));
+  }
+});
