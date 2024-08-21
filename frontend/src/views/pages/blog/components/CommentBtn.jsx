@@ -98,7 +98,7 @@ const CommentBtn = ({ post, setThisComments }) => {
     return (
       <Dialog>
         <DialogTrigger>
-          <Button className="cursor-pointer">Comment</Button>
+          <Button className="cursor-pointer" variant="secondary">Comment</Button>
         </DialogTrigger>
         <DialogContent>
           <Onboard dafault="login" />
