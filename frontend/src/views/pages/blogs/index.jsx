@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from "react";
-import PostCard from "../../layout/components/PostCard";
 import { makeGetRequest } from "../../utils/apis/makeGetRequest";
 import { backend_url } from "../../utils/constant";
-import { LoaderZoomie } from "../../components/Loaders";
-import Post from "./components/Post";
+import Search from "./components/Search";
+import { useDebounce } from "../../utils/hooks/useDebounce";
+import Blogs from "./components/Blogs";
 
 const index = () => {
   const [blogs, setBlogs] = useState(null);
+  const [search, setSearch] = useState("");
 
-  async function getAllBlogs() {
-    const res = await makeGetRequest(`${backend_url}/post`);
+  const debouncedSearch = useDebounce(search, 300);
+
+  async function getAllBlogs(search) {
+    const res = await makeGetRequest(`${backend_url}/post?search=${search}`);
     if (res.success === true) {
       setBlogs(res.data);
     }
   }
 
   useEffect(() => {
-    getAllBlogs();
-  }, []);
+    setBlogs(null);
+    getAllBlogs(debouncedSearch);
+  }, [debouncedSearch]);
 
-  if (!blogs) {
-    return (
-      <div className="text-center">
-        <LoaderZoomie size={"100"} />
-      </div>
-    );
-  }
+  console.log(search);
 
   return (
     <div className="p-[5%] space-y-4">
       <h1 className="text-3xl">Blogs </h1>
-      <div className="space-y-3">
-        {blogs.map((m) => {
-          return <Post key={m._id} post={m} />;
-        })}
+      <div className="flex flex-col gap-3">
+        <Search search={search} setSearch={setSearch} />
+        <Blogs blogs={blogs} />
       </div>
     </div>
   );
