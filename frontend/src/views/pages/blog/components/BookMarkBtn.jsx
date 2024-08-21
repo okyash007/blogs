@@ -9,6 +9,7 @@ import { setUser } from "../../../../store/userSlice";
 import { CirCleLoader } from "../../../components/Loaders";
 import Success from "../../../layout/toast/Success";
 import { toast } from "sonner";
+import { backend_url } from "../../../utils/constant";
 
 const BookMarkBtn = () => {
   const [loading, setLoading] = useState(false);
@@ -17,9 +18,7 @@ const BookMarkBtn = () => {
   const { id } = useParams();
 
   async function bookmarkToggle(params) {
-    const res = await makeGetRequest(
-      `http://localhost:4000/user/bookmark/${id}`
-    );
+    const res = await makeGetRequest(`${backend_url}/user/bookmark/${id}`);
     setLoading(false);
     if (res.success) {
       toast(<Success message={res.message} />);
