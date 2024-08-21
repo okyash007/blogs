@@ -32,6 +32,10 @@ const BookMarkBtn = () => {
     }
   }
 
+  if (!user) {
+    return <></>;
+  }
+
   if (loading) {
     return (
       <Button variant="secondary" size="icon">
