@@ -59,6 +59,9 @@ const Private = () => {
                   <Link to={"/create"}>
                     <DropdownMenuItem>Create Blog</DropdownMenuItem>
                   </Link>
+                  <Link to={"/bookmarks"}>
+                    <DropdownMenuItem>Bookmarks</DropdownMenuItem>
+                  </Link>
                   <DropdownMenuItem
                     onClick={() => {
                       dispatch(setUser(null));

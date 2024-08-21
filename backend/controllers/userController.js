@@ -1,6 +1,7 @@
 import {
   createUser,
   findUser,
+  findUserBookmarks,
   findUserById,
   findUserPopulate,
   updateUser,
@@ -94,4 +95,13 @@ export const userBookmarkToggle = asyncHandler(async (req, res, next) => {
     });
     return res.json(new apiResponse(200, undefined, "Bookmark added"));
   }
+});
+
+export const userBookmarks = asyncHandler(async (req, res) => {
+  const user = await findUserBookmarks(req.user.id);
+
+  if (!user) {
+    return next(new apiError(400, ["user not found"]));
+  }
+  return res.json(new apiResponse(200, user.bookmarks));
 });

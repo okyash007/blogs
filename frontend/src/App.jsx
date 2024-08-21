@@ -7,6 +7,7 @@ import Create from "./views/pages/create/index";
 import Edit from "./views/pages/edit/index";
 import Profile from "./views/pages/profile/index";
 import EditProfile from "./views/pages/edit-profile/index";
+import Bookmarks from "./views/pages/bookmarks/index";
 import {
   Navigate,
   RouterProvider,
@@ -87,6 +88,10 @@ function App() {
         {
           path: "/profile/edit",
           element: <EditProfile />,
+        },
+        {
+          path: "/bookmarks",
+          element: <Bookmarks />,
         },
         {
           path: "/",
