@@ -8,7 +8,7 @@ const Success = ({ message }) => {
         <MdFileDownloadDone size="20" color="green" />
         <p className="text-green-600 text-xl">Success</p>
       </div>
-      <p className="text-xs text-[#ffffff4a]">
+      <p className="text-xs text-[#0000004a]">
         {message ? message : "Task done successfullt"}
       </p>
     </div>

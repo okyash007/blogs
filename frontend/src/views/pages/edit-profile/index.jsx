@@ -128,7 +128,7 @@ function index() {
           />
           {loading ? (
             <Button className={"mt-4"}>
-              <CirCleLoader size={"20"} stroke={"3"} color={"black"} />
+              <CirCleLoader size={"20"} stroke={"3"} color={"white"} />
             </Button>
           ) : (
             <Button type="submit" className={"mt-4"}>

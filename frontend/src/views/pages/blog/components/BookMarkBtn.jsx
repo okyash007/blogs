@@ -38,7 +38,7 @@ const BookMarkBtn = () => {
   if (loading) {
     return (
       <Button variant="secondary" size="icon">
-        <CirCleLoader size="20" stroke="2" color="white" />
+        <CirCleLoader size="20" stroke="2" color="black" />
       </Button>
     );
   }

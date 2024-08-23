@@ -46,7 +46,7 @@ const PublishBtn = ({ blog }) => {
   if (loading) {
     return (
       <Button className="px-8">
-        <CirCleLoader color="black" size="20" stroke="3" />
+        <CirCleLoader color="white" size="20" stroke="3" />
       </Button>
     );
   } else {

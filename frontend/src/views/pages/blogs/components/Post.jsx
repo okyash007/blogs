@@ -4,7 +4,7 @@ import UserCard from "../../../layout/components/UserCard";
 
 const Post = ({ post }) => {
   return (
-    <div className="space-y-3 bg-[#ffffff1a] p-5 rounded-2xl">
+    <div className="space-y-3 bg-[#ffffff8a] p-5 rounded-2xl">
       <UserCard user={post.user} />
       <PostCard post={post} />
     </div>

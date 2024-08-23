@@ -24,7 +24,7 @@ const UpdateBtn = ({ blog }) => {
   if (loading) {
     return (
       <Button className="px-7">
-        <CirCleLoader size="20" stroke="3" color="black" />
+        <CirCleLoader size="20" stroke="3" color="white" />
       </Button>
     );
   }

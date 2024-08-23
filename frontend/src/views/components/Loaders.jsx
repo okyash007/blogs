@@ -11,7 +11,7 @@ export const LoaderZoomie = ({ size, color }) => {
       stroke="5"
       bg-opacity="0.1"
       speed="0.8"
-      color={color ? color : "white"}
+      color={color ? color : "black"}
     ></l-zoomies>
   );
 };
@@ -23,7 +23,7 @@ export const CirCleLoader = ({ size, stroke, color }) => {
       stroke={stroke}
       bg-opacity="0"
       speed="2"
-      color={color}
+      color={color ? color : "black"}
     ></l-ring>
   );
 };

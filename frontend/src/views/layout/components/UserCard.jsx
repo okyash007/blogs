@@ -18,7 +18,7 @@ const UserCard = ({ user, email }) => {
         <Link to={`/profile/${user._id}`}>
           <h1 className="font-bold hover:underline">{user.name}</h1>
         </Link>
-        {email && <p className="text-xs text-[#ffffff6a]">{user.email}</p>}
+        {email && <p className="text-xs text-[#0000006a]">{user.email}</p>}
       </div>
     </div>
   );
