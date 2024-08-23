@@ -12,10 +12,10 @@ const Editor = ({ editable, blocks, setBlocks }) => {
   const darkRedTheme = {
     colors: {
       editor: {
-        text: "#ffffff",
-        background: "#000000",
+        text: "#000000",
+        background: "#ffffff",
       },
-      sideMenu: "#ffffff7a",
+      sideMenu: "#0000007a",
     },
   };
 

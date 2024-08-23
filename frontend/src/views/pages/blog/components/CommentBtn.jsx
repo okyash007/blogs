@@ -74,7 +74,7 @@ const CommentBtn = ({ post, setThisComments }) => {
                 variant="ghost"
                 size="icon"
               >
-                <CirCleLoader size={"20"} stroke={"3"} color="white" />
+                <CirCleLoader size={"20"} stroke={"3"} />
               </Button>
             ) : (
               <Button

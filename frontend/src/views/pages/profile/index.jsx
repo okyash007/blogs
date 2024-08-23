@@ -49,7 +49,7 @@ const index = () => {
         {user.posts.map((m) => {
           return (
             <div
-              className="bg-[#ffffff1a] p-5 rounded-2xl relative"
+              className="bg-[#ffffff8a] p-5 rounded-2xl relative"
               key={m._id}
             >
               {localUser && localUser._id === user._id && (

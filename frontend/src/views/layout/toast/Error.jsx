@@ -8,7 +8,7 @@ const Error = ({ message }) => {
         <MdError size="20" color="red" />
         <p className="text-red-600 text-xl">Error</p>
       </div>
-      <p className="text-xs text-[#ffffff4a]">
+      <p className="text-xs text-[#0000004a]">
         {message ? message : "Something went wrong"}
       </p>
     </div>

@@ -21,13 +21,13 @@ const index = () => {
 
   return (
     <div>
-      <div className="px-[5%] text-right">
+      <div className="px-[5%] text-right mt-20">
         <PublishBtn blog={blog} />
       </div>
       <div className="mb-4 " style={{ marginInline: "50px" }}>
         <Input
           value={blog.title}
-          className="bg-black border-0 px-0 py-8 text-5xl font-extrabold tracking-wide"
+          className="bg-[#e5ecf3] border-0 px-0 py-8 text-5xl font-extrabold tracking-wide"
           placeholder="Title"
           onChange={(e) => {
             setBlog((prev) => {

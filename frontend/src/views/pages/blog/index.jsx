@@ -32,7 +32,7 @@ const index = () => {
   }
 
   return (
-    <div className="pb-[5%]">
+    <div className="pb-[5%] mt-24">
       <div className="mb-6 mx-[5%]">
         <UserCard user={blog.user} />
       </div>
@@ -42,7 +42,7 @@ const index = () => {
       <div>
         <Editor blocks={blog.content} editable={false} setBlocks={() => {}} />
       </div>
-      <div className="mx-[5%]">
+      <div className="mx-[5%] mt-8">
         <Comments comments={blog.comments} post={blog._id} />
       </div>
     </div>

@@ -69,13 +69,18 @@
 }
 
 .bn-editor {
-  padding-inline: 0;
+  padding: 2%;
 }
 
 body {
-  background-color: black;
+  background-color: #e5ecf3;
 }
 
 .sr-only {
   display: none;
+}
+
+a {
+  padding: 0;
+  margin: 0;
 }
